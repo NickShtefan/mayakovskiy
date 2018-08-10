@@ -241,12 +241,12 @@ class Registrator extends BasicService {
         if (env.MAX_GOLOS_POWER === 0){
             checkMaxPower = true;
         } else{
-            checkMaxPower = power <= env.MAX_GOLOS_POWER
+            checkMaxPower = (power <= env.MAX_GOLOS_POWER)
         }
 
-        logger.log(`Verification Power for: ${post.author} with GP = ${power}, result = ${power >= env.MIN_GOLOS_POWER && checkMaxPower}`);
+        logger.log(`Verification Power for: ${post.author} with GP = ${power}, result = ${(power >= env.MIN_GOLOS_POWER) && checkMaxPower}`);
 
-        return (power >= env.MIN_GOLOS_POWER && checkMaxPower);
+        return ((power >= env.MIN_GOLOS_POWER) && checkMaxPower);
     }
 
     async _remoteValidation(post) {
