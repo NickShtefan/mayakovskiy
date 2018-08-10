@@ -23,9 +23,13 @@ services:
       - services-tier
     environment:
       - MIN_GOLOS_POWER
+      - MAX_GOLOS_POWER
+      - VOTE_BY_DAY_WITH_MAX_WEIGHT
       - LOGIN
       - WIF
       - DAY_START
+      - BENEFICIARY_NAME
+      - BENEFICIARY_PROCENT
       - MONGO_CONNECT_STRING
       - BLOCKCHAIN_SUBSCRIBE_TIMEOUT
       - BLOCKCHAIN_NODE_ADDRESS
