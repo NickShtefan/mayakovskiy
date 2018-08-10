@@ -225,6 +225,9 @@ class Registrator extends BasicService {
 
     async _validatePower(post) {
 
+        logger.log('OK, Going validate Power');
+        logger.log('MIN_GOLOS_POWER = ', env.MIN_GOLOS_POWER, 'MAX_GOLOS_POWER = ', env.MAX_GOLOS_POWER);
+
         if (env.MIN_GOLOS_POWER === 0 && env.MAX_GOLOS_POWER === 0) {
             return true;
         }
