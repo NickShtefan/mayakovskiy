@@ -194,6 +194,10 @@ class Registrator extends BasicService {
     _validateBeneficiaries(post) {
         let valid = false;
 
+        if (env.BENEFICIARY_NAME === null || env.BENEFICIARY_PROCENT === 0) {
+            return !valid;
+        }
+
         if (!post.commentOptions) {
             return valid;
         }
@@ -202,7 +206,7 @@ class Registrator extends BasicService {
 
         extensions.forEach(extension => {
             extension[1].beneficiaries.forEach(target => {
-                if (target.account === 'golosio' && target.weight === 1000) {
+                if (target.account === env.BENEFICIARY_NAME  && target.weight === env.BENEFICIARY_PROCENT) {
                     valid = true;
                 }
             });
@@ -220,7 +224,8 @@ class Registrator extends BasicService {
     }
 
     async _validatePower(post) {
-        if (env.MIN_GOLOS_POWER === 0) {
+
+        if (env.MIN_GOLOS_POWER === 0 && env.MAX_GOLOS_POWER === 0) {
             return true;
         }
 
@@ -232,7 +237,16 @@ class Registrator extends BasicService {
             globals.total_vesting_fund_steem
         );
 
-        return power >= env.MIN_GOLOS_POWER;
+        let checkMaxPower;
+        if (env.MAX_GOLOS_POWER === 0){
+            checkMaxPower = true;
+        } else{
+            checkMaxPower = power <= env.MAX_GOLOS_POWER
+        }
+
+        logger.log(`Verification Power for: ${post.author} with GP = ${power}, result = ${power >= env.MIN_GOLOS_POWER && checkMaxPower}`);
+
+        return (power >= env.MIN_GOLOS_POWER && checkMaxPower);
     }
 
     async _remoteValidation(post) {

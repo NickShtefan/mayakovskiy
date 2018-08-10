@@ -4,10 +4,11 @@ const Moments = require('../core/Moments');
 const stats = require('../core/Stats').client;
 const Post = require('../model/Post');
 const Plan = require('../model/Plan');
+const env = require('../Env');
 
 // BlockChain constants
 const THE_100_PERCENT_DECIMALS = 100 * 100;
-const VOTE_BY_DAY_WITH_MAX_WEIGHT = 40;
+const VOTE_BY_DAY_WITH_MAX_WEIGHT = env.VOTE_BY_DAY_WITH_MAX_WEIGHT;
 const DAY_VOTE_WEIGHT = THE_100_PERCENT_DECIMALS * VOTE_BY_DAY_WITH_MAX_WEIGHT;
 
 /**
